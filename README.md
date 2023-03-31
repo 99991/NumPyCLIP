@@ -1,3 +1,5 @@
+# Don't use yet, still in development. Architectual changes imminent.
+
 # NumPyCLIP
 
 Pure NumPy implementation of https://github.com/openai/CLIP
