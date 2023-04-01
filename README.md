@@ -8,6 +8,8 @@ For example, the image [`data/CLIP.png`](https://github.com/99991/NumPyCLIP/blob
 
 Possible applications include image classification, image captioning, visual question answering, text-based image search, image-based text search and image-filtering.
 
+# [Example](https://github.com/99991/NumPyCLIP/blob/main/example.py)
+
 ```python
 import numpyclip
 import numpy as np
@@ -28,6 +30,19 @@ probs = numpyclip.softmax(logits_per_image, axis=-1)
 print("Label probs:", probs)  # prints: [[0.99279356 0.00421067 0.00299573]]
 ```
 
+# Install dependencies, download and run on Debian/Ubuntu
+
+```
+sudo apt update
+sudo apt install python3 python3-pip git
+pip3 install numpy pillow
+git clone --depth 1 https://github.com/99991/NumPyCLIP.git
+cd NumPyCLIP
+python3 example.py
+```
+
+This will install Python, git, NumPy and Pillow (for image loading). Once the dependencies are installed, it will download NumPyCLIP and run [`example.py`](https://github.com/99991/NumPyCLIP/blob/main/example.py). The first time, the file `~/.cache/clip/ViT-B-32.pt` (337.6 MiB) will be downloaded, which may take a few minutes.
+
 # Limitations
 
 * NumPyCLIP is slower than the original PyTorch implementation if you have a powerful GPU.
@@ -36,3 +51,10 @@ print("Label probs:", probs)  # prints: [[0.99279356 0.00421067 0.00299573]]
 * So far, only the ViT-B/32 model has been ported.
 * This library has not been tested much yet.
 * During pre-processing, the input image is resized to 224x224 and center-cropped. For best results, make sure that all important content is in the centre of the image and of a reasonable size so that it is not lost when the image is scaled down.
+
+# TODO
+
+* Test more images and text with weird unicode symbols
+* Implement other models
+* Package for PyPi
+* Investigate whether it is safe to ignore the RuntimeWarning about infinity during computation of [`sigmoid`](https://github.com/99991/NumPyCLIP/blob/68cbd9254d4696d9ab5b4cd39e7d150547251740/numpyclip.py#L108)
