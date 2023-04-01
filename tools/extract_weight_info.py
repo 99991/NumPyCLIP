@@ -6,9 +6,7 @@
 import zipfile
 import torch
 import json
-import re
 import os
-from clip.model import CLIP
 
 
 def load_zip(path):
