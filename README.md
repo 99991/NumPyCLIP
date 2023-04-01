@@ -39,6 +39,7 @@ pip3 install numpy pillow
 git clone --depth 1 https://github.com/99991/NumPyCLIP.git
 cd NumPyCLIP
 python3 example.py
+python3 tests.py
 ```
 
 This will install Python, git, NumPy and Pillow (for image loading). Once the dependencies are installed, it will download NumPyCLIP and run [`example.py`](https://github.com/99991/NumPyCLIP/blob/main/example.py). The first time, the file `~/.cache/clip/ViT-B-32.pt` (337.6 MiB) will be downloaded, which may take a few minutes.
