@@ -22,4 +22,4 @@ assert np.abs(expected_text_features - text_features).max() < 1e-5
 assert np.abs(image_features - expected_image_features).max() < 1e-5
 assert np.abs(probs - expected_probs).max() < 1e-5
 
-print("Test passed :)")
+print("Tests passed :)")
