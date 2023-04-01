@@ -1,6 +1,6 @@
 import numpyclip
-from PIL import Image
 import numpy as np
+from PIL import Image
 
 model, preprocess = numpyclip.load("ViT-B/32")
 
