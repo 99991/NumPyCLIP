@@ -44,6 +44,13 @@ python3 tests.py
 
 This will install Python, git, NumPy and Pillow (for image loading). Once the dependencies are installed, it will download NumPyCLIP and run [`example.py`](https://github.com/99991/NumPyCLIP/blob/main/example.py). The first time, the file `~/.cache/clip/ViT-B-32.pt` (337.6 MiB) will be downloaded, which may take a few minutes.
 
+By default, the model weights will be downloaded to `~/.cache/CLIP`, but you can also specify the directory with the `CLIP_DIR` environment variable:
+
+```bash
+# Download weights to "my/weights/directory"
+CLIP_DIR=my/weights/directory python3 tests.py
+```
+
 # Limitations
 
 * NumPyCLIP is slower than the original PyTorch implementation if you have a powerful GPU.

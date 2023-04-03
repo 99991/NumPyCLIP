@@ -14,7 +14,7 @@ NDFloat32 = numpy.typing.NDArray[np.float32]
 NDInt64 = numpy.typing.NDArray[np.int64]
 
 
-def download(url: str, filename: str) -> None:
+def download(url: str, filename: str, chunk_size: int = 10**6) -> None:
     # Create directories if they don't exist yet
     directories = os.path.dirname(filename)
     if directories:
@@ -26,11 +26,11 @@ def download(url: str, filename: str) -> None:
 
         buf = b""
         while True:
-            data = response.read(10**6)
+            data = response.read(chunk_size)
             if not data:
                 break
             buf += data
-            print(f"Downloading model... {len(buf) / total * 100:.2f} %")
+            print(f"Downloading {filename} {len(buf) / total * 100:.2f} %")
 
     # Write the downloaded data to the file
     with open(filename, "wb") as f:
@@ -50,7 +50,7 @@ def load_zip(path: str) -> typing.Dict[str, bytes]:
 
 
 class Params:
-    def __init__(self, name: str) -> None:
+    def __init__(self, name: str, download_root: str = None) -> None:
         assert name == "ViT-B/32", f"Model {name} not supported yet. Only ViT-B-32 currently supported."
 
         model_urls = {
@@ -69,9 +69,14 @@ class Params:
 
         name = name.replace("/", "-")
 
-        model_path = os.path.expanduser(f"~/.cache/clip/{name}.pt")
+        if download_root is None:
+            download_root = os.path.expanduser(f"~/.cache/clip")
+            download_root = os.environ.get("CLIP_DIR", download_root)
+
+        model_path = os.path.join(download_root, f"{name}.pt")
 
         if not os.path.isfile(model_path):
+            print(f"Downloading {model_path} from {model_url}")
             download(model_url, model_path)
 
         self.files = load_zip(model_path)
@@ -335,5 +340,5 @@ class Model:
         return image_text_logits(image, text, self.params)
 
 
-def load(name: str) -> typing.Tuple[Model, typing.Callable[[Image.Image, int], NDFloat32]]:
-    return Model(Params(name)), preprocess
+def load(name: str, download_root: str = None) -> typing.Tuple[Model, typing.Callable[[Image.Image, int], NDFloat32]]:
+    return Model(Params(name, download_root)), preprocess
