@@ -1,6 +1,6 @@
 # NumPyCLIP
 
-This is a pure NumPy implementation of https://github.com/openai/CLIP.
+This is a pure NumPy implementation of [OpenAI's CLIP neural network](https://github.com/openai/CLIP).
 
 You can use NumPyCLIP to embed images or text as a 512-dimensional feature vectors. The cosine similarity between feature vectors should be high when a text corresponds to an image.
 
@@ -64,4 +64,3 @@ CLIP_DIR=my/weights/directory python3 tests.py
 
 * Implement other models
 * Package for PyPi
-* Investigate whether it is safe to ignore the RuntimeWarning about infinity during computation of [`sigmoid`](https://github.com/99991/NumPyCLIP/blob/68cbd9254d4696d9ab5b4cd39e7d150547251740/numpyclip.py#L108)

@@ -111,9 +111,9 @@ class Params:
 
 
 def sigmoid(x: NDFloat32) -> NDFloat32:
-    with warnings.catch_warnings():
-        warnings.filterwarnings("ignore", category=RuntimeWarning)
-        return 1.0 / (1.0 + np.exp(-x))
+    # Guard against overflow
+    # 88.7 is a little bit less than np.log(np.finfo(np.float32).max)
+    return 1.0 / (1.0 + np.exp(np.minimum(-x, 88.7)))
 
 
 def softmax(x: NDFloat32, axis: int) -> NDFloat32:
