@@ -62,7 +62,6 @@ CLIP_DIR=my/weights/directory python3 tests.py
 
 # TODO
 
-* Test more images and text with weird unicode symbols
 * Implement other models
 * Package for PyPi
 * Investigate whether it is safe to ignore the RuntimeWarning about infinity during computation of [`sigmoid`](https://github.com/99991/NumPyCLIP/blob/68cbd9254d4696d9ab5b4cd39e7d150547251740/numpyclip.py#L108)
